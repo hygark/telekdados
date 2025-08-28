@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telekdados-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: telekdados-app
+  template:
+    metadata:
+      labels:
+        app: telekdados-app
+    spec:
+      containers:
+      - name: telekdados-app
+        image: telekdados:latest
+        command: ["python", "gui.py"]
+        envFrom:
+        - configMapRef:
+            name: telekdados-config
+        volumeMounts:
+        - name: app-volume
+          mountPath: /app
+      volumes:
+      - name: app-volume
+        hostPath:
+          path: /path/to/your/repo  # Ajuste pro seu diretório local
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telekdados-worker
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: telekdados-worker
+  template:
+    metadata:
+      labels:
+        app: telekdados-worker
+    spec:
+      containers:
+      - name: telekdados-worker
+        image: telekdados:latest
+        command: ["python", "worker.py"]
+        envFrom:
+        - configMapRef:
+            name: telekdados-config
+        volumeMounts:
+        - name: app-volume
+          mountPath: /app
+      volumes:
+      - name: app-volume
+        hostPath:
+          path: /path/to/your/repo  # Ajuste pro seu diretório local
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:latest
+        ports:
+        - containerPort: 6379
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+      - name: grafana
+        image: grafana/grafana:latest
+        ports:
+        - containerPort: 3000

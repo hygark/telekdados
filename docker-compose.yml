@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+  app:
+    build: .
+    command: python gui.py
+    depends_on:
+      - redis
+      - grafana
+    volumes:
+      - .:/app
+    environment:
+      - REDIS_HOST=redis
+      - GRAFANA_URL=http://grafana:3000
+      - API_ID=YOUR_API_ID  # Substitua
+      - API_HASH=YOUR_API_HASH  # Substitua
+      - PHONE=YOUR_PHONE_NUMBER  # Substitua
+      - SOURCE_CHANNEL=t.me/source_channel  # Substitua
+      - DEST_CHANNEL=t.me/dest_channel  # Substitua
+  worker:
+    build: .
+    command: python worker.py
+    depends_on:
+      - redis
+    volumes:
+      - .:/app
+    environment:
+      - REDIS_HOST=redis
+      - API_ID=YOUR_API_ID  # Substitua
+      - API_HASH=YOUR_API_HASH  # Substitua
+      - PHONE=YOUR_PHONE_NUMBER  # Substitua
+      - SOURCE_CHANNEL=t.me/source_channel  # Substitua
+      - DEST_CHANNEL=t.me/dest_channel  # Substitua
+    deploy:
+      replicas: 3

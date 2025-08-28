@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: telekdados-config
+data:
+  REDIS_HOST: redis-service
+  GRAFANA_URL: http://grafana-service:3000
+  API_ID: "YOUR_API_ID"  # Substitua
+  API_HASH: "YOUR_API_HASH"  # Substitua
+  PHONE: "YOUR_PHONE_NUMBER"  # Substitua
+  SOURCE_CHANNEL: "t.me/source_channel"  # Substitua
+  DEST_CHANNEL: "t.me/dest_channel"  # Substitua
