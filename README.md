@@ -2,7 +2,7 @@
 
 ## IMPORTANT LEGAL NOTICE
 
-**Recommendation:** Test only in channels/groups you control or where you have explicit permission. Example: your own channels or with the owner’s consent. Never use it in real systems without authorization.
+**Recommendation:** Test only in channels/groups you control or where you have explicit permission. Example: your own channels or with the owner’s consent.
 
 ---
 
