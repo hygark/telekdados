@@ -52,7 +52,7 @@ The goal is to preserve important content that could be lost due to Telegram fai
 ### Clone the repository:
 
 ```bash
-git clone https://your-repo/telekdados.git
+git clone https://github.com/hygark/telekdados.git
 ```
 
 ### Obtain API credentials:
