@@ -138,7 +138,6 @@ git clone https://github.com/hygark/telekdados.git
 ## Code Structure
 
 * **main.py** → Core logic, Telegram, Redis, Grafana integration
-* **gui.py** → Tkinter GUI titled *“Hygark’s TelekDados”*
 * **worker.py** → Processes queued messages/media
 * **Dockerfile** → For containerization
 * **docker-compose.yml** → Orchestrates workers, Redis, Grafana (local testing)
